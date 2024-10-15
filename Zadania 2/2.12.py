@@ -2,7 +2,7 @@
 #    line = file.read()
 
 line = 'Pierwsza linijka\tto jest\na teraz druga!\ntrzecia\nGvR\tkoniec.'
-print(line, \'n')
+print(line, '\n')
 
 words = line.split()
 
