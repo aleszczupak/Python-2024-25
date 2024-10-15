@@ -1,0 +1,6 @@
+# komentarz
+nie komentarz
+kolejna linijka
+# znowu komentarz
+ostatnia linijka
+a jednak nie GvR jeszcze
