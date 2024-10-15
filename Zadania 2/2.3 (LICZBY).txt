@@ -1,0 +1,113 @@
+Python 3.11.4 (tags/v3.11.4:d2340ef, Jun  7 2023, 05:45:37) [MSC v.1934 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license()" for more information.
+
+>>> # zapis liczb różnych typów
+>>> a = 4; b = 5.0; c = 6.6e+10; d = 4 + 0.3j; f = 1/2
+>>> print(a, b, c, d, f)
+4 5.0 66000000000.0 (4+0.3j) 0.5
+>>> print(type(a), type(b), type(c), type(d), type(f))
+<class 'int'> <class 'float'> <class 'float'> <class 'complex'> <class 'float'>
+>>> d.real, d.imag, abs(d)
+(4.0, 0.3, 4.011234224026316)
+>>> 100_000_000 == 10 ** 8
+True
+>>> f.as_integer_ratio()
+(1, 2)
+
+>>> # sposoby wyświetlania liczb
+>>> 2 / 3 # repr
+0.6666666666666666
+>>> str(2 / 3) # cudzysłów
+'0.6666666666666666'
+>>> print(2 / 3) # str
+0.6666666666666666
+
+>>> # konwersja typów
+>>> # jawna
+>>> b, int(b) # float -> int
+(5.0, 5)
+>>> a, float(a) # int -> float
+(4, 4.0)
+>>> complex(a, b)
+(4+5j)
+>>> int('1111', 2) # system dwójkowy -> dziesiętny, musi być liczba w cudzysłowie
+15
+>>> str(c) # float -> string
+'66000000000.0'
+>>> # niejawna
+>>> a + b # int + float = float
+9.0
+
+>>> # wbudowane funkcje matematyczne - przykłady
+>>> pow(3, 3, 5)
+2
+>>> (3 ** 3) % 5
+2
+>>> abs(-1)
+1
+>>> abs(3 - 4j)
+5.0
+>>> round(0.25, 1)
+0.2
+>>> round(2.675, 2)
+2.67
+>>> round(1.5)
+2
+>>> # Python's documentation: it's a result of the fact that most decimal fractions can't be represented exactly as a float
+>>> # ale ogólnie round() zaokrągla od 5 wzwyż
+>>> min(['ola', 'ala', 'Aleksandra'])
+'Aleksandra'
+>>> sum([3, 4, 5, -1])
+11
+>>> import math
+>>> math.exp(3)
+20.085536923187668
+>>> math.sqrt(4)
+2.0
+>>> # działania na liczbach zespolonych
+>>> import cmath
+>>> cmath.sqrt(complex(-16.0, -0.0))
+-4j
+
+>>> # dzielenie
+>>> 5 % 2 # modulo
+1
+>>> 5 / 2 # prawdziwe
+2.5
+>>> 4 / 2 # zamienia int -> float
+2.0
+>>> 5 // 2 # bez reszty
+2
+>>> 4 // 2
+2
+>>> 1 / 2, 1.0 / 2.0
+(0.5, 0.5)
+
+>>> # zaokrąglanie liczb
+>>> round(1.344, 2)
+1.34
+>>> round(1.351, 2)
+1.35
+>>> int(2.999) # w dół
+2
+>>> math.trunc(2.888) # też j.w.: w dół do całości
+2
+
+>>> # dzielenie przez zero
+2 / 0
+Traceback (most recent call last):
+  File "<pyshell#48>", line 1, in <module>
+    2 / 0
+ZeroDivisionError: division by zero
+>>> 2 / math.sin(math.pi)
+1.633123935319537e+16
+
+>>> # ciekawy przypadek
+>>> x = 10e9
+>>> 1 / (x - math.sqrt(x**2-1))
+Traceback (most recent call last):
+  File "<pyshell#52>", line 1, in <module>
+    1 / (x - math.sqrt(x**2-1))
+ZeroDivisionError: float division by zero
+>>> x + math.sqrt(x**2-1) # po przekształceniach
+20000000000.0
