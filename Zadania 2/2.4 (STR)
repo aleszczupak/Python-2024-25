@@ -1,0 +1,74 @@
+Python 3.11.4 (tags/v3.11.4:d2340ef, Jun  7 2023, 05:45:37) [MSC v.1934 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license()" for more information.
+
+>>> # funkcja len()
+>>> len('napis')
+5
+>>> len('Aleksandra')
+10
+>>> len(str(2 ** 10000)) # liczby nie można zostawić, trzeba zamienić na string
+3011
+
+>>> # cudzysłów
+>>> "abc" == 'abc'
+True
+>>> # konkatenacja
+>>> S = "ab" 'cd'
+>>> S
+'abcd'
+>>> "ab'cd", 'ab"cd'
+("ab'cd", 'ab"cd')
+
+>>> # znaki specjalne
+>>> S = "a\tb\nc\"d"
+>>> print(S)
+a	b
+c"d
+>>> # potrzebny znak \ żeby wyświetlić cudzysłów
+>>> print("{} {}".format(len(S), S))
+7 a	b
+c"d
+
+>>> # napis wielowierszowy
+>>> S = """pierwsza
+... druga
+... trzecia linijka"""
+>>> print(S)
+pierwsza
+druga
+trzecia linijka
+
+>>> # indeksowanie i wycinki
+>>> S = 'abrakadabra'
+>>> S[1], S[-1], S[-2], S[2:5] # drugi, ostatni, przedostatni, od 2 do 4 włącznie
+('b', 'a', 'r', 'rak')
+>>> S = 'Aleksandra'
+>>> S[3:]
+'ksandra'
+>>> S[:3]
+'Ale'
+
+>>> # konkatenacja i powtarzanie napisów
+>>> L = ['a', 'b', 'c']
+>>> L[0] + L[1] + L[1] + L[0] + L[2]
+'abbac'
+>>> S = ' * '.join(['1', '2', '3', '4'])
+>>> S
+'1 * 2 * 3 * 4'
+>>> eval(S)
+24
+>>> L[0] + ' + ' + L[1] + ' = ' + L[2]
+'a + b = c'
+>>> S = '%'
+>>> S.join(['1', '2', '3'])
+'1%2%3'
+
+>>> # niezmienność napisów
+>>> name = 'Ola'
+>>> name[0]
+'O'
+>>> name[0] = 'E'
+Traceback (most recent call last):
+  File "<pyshell#38>", line 1, in <module>
+    name[0] = 'E'
+TypeError: 'str' object does not support item assignment
