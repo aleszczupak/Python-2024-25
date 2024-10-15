@@ -1,0 +1,124 @@
+Python 3.11.4 (tags/v3.11.4:d2340ef, Jun  7 2023, 05:45:37) [MSC v.1934 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license()" for more information.
+
+>>> # lista metod
+>>> dir(dict)
+['__class__', '__class_getitem__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__ior__', '__iter__', '__le__', '__len__', '__lt__', '__ne__', '__new__', '__or__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__ror__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'clear', 'copy', 'fromkeys', 'get', 'items', 'keys', 'pop', 'popitem', 'setdefault', 'update', 'values']
+
+>>> # operacje na słownikach
+>>> d1 = dict()
+>>> d1[1] = 'a'
+>>> d1[5] = 'e'
+>>> d1
+{1: 'a', 5: 'e'}
+>>> d2 = dict([(1, 'ola'), (2, 'ewa')])
+>>> d2
+{1: 'ola', 2: 'ewa'}
+>>> d3 = dict(d2)
+>>> d3[1] = 'basia'
+>>> d2
+{1: 'ola', 2: 'ewa'}
+>>> d3
+{1: 'basia', 2: 'ewa'}
+>>> 3 in d3
+False
+>>> del d2[2]
+>>> d2
+{1: 'ola'}
+>>> eng_pol = {}
+>>> eng_pol['red'] = 'czerwony'
+>>> eng_pol['green'] = 'zielony'
+>>> eng_pol['blue'] = 'niebieski'
+>>> eng_pol.keys()
+dict_keys(['red', 'green', 'blue'])
+>>> eng_pol.values()
+dict_values(['czerwony', 'zielony', 'niebieski'])
+>>> eng_pol.items()
+dict_items([('red', 'czerwony'), ('green', 'zielony'), ('blue', 'niebieski')])
+>>> d4 = dict(zip(['name', 'age'], ['Ania', 33]))
+>>> d4
+{'name': 'Ania', 'age': 33}
+>>> d4.pop('name')
+'Ania'
+>>> d4
+{'age': 33}
+>>> d4['surname'] = 'Grzyb'
+>>> d4
+{'age': 33, 'surname': 'Grzyb'}
+>>> d4.popitem()
+('surname', 'Grzyb')
+>>> d5 = dict(name='Ania', job='Physicist')
+>>> d5
+{'name': 'Ania', 'job': 'Physicist'}
+>>> d4.update(d5)
+>>> d4
+{'age': 33, 'name': 'Ania', 'job': 'Physicist'}
+>>> d5
+{'name': 'Ania', 'job': 'Physicist'}
+>>> d4.update(surname='Kwiat')
+>>> d4
+{'age': 33, 'name': 'Ania', 'job': 'Physicist', 'surname': 'Kwiat'}
+
+# kopiowanie płytkie
+>>> d = {1: 'a', 2: 'b', 3: 'c'}
+>>> d1 = d
+>>> d2 = d.copy()
+>>> d3 = dict(d)
+>>> id(d), id(d1), id(d2), id(d3)
+(2094363973568, 2094363973568, 2094357189504, 2094358647872)
+>>> for (number, letter) in d.items():
+>>>     print(number, ',', letter)
+...
+1 , a
+2 , b
+3 , c
+
+>>> # sortowanie
+>>> keys = d.keys()
+>>> keys.sort()
+Traceback (most recent call last):
+  File "<pyshell#35>", line 1, in <module>
+    keys.sort()
+AttributeError: 'dict_keys' object has no attribute 'sort'
+>>> keys # generator a nie lista
+dict_keys([1, 2, 3])
+>>> keys = list(d.keys())
+>>> keys.sort()
+>>> keys
+[1, 2, 3]
+>>> items = list(d.items())
+>>> items.sort()
+>>> items
+[(1, 'a'), (2, 'b'), (3, 'c')]
+>>> items.sort(reverse=True)
+>>> items
+[(3, 'c'), (2, 'b'), (1, 'a')]
+>>> d = {3: 1, 2: 2, 1: 3}
+>>> items = list(d.items())
+>>> items
+[(3, 1), (2, 2), (1, 3)]
+>>> items.sort()
+>>> items
+[(1, 3), (2, 2), (3, 1)]
+
+>>> # sklejanie dwóch słowników
+>>> A = {1: 'a', 2: 'b'}
+>>> B = {9: 'd', 4: 'c'}
+>>> C = A.copy()
+>>> C.update(B)
+>>> C
+{1: 'a', 2: 'b', 9: 'd', 4: 'c'}
+>>> d5 = {x: x ** 2 for x in range(5)}
+>>> d5
+{0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
+>>> d6 = dict((x, x * 3) for x in [3, 5, 10, -1])
+>>> d6
+{3: 9, 5: 15, 10: 30, -1: -3}
+>>> # unia
+>>> d7 = d5 | d6
+>>> d7
+{0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 15, 10: 30, -1: -3}
+>>> # update in-place
+>>> d5 |= d6
+>>> d5
+{0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 15, 10: 30, -1: -3}
