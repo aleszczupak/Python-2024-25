@@ -1,0 +1,199 @@
+Python 3.11.4 (tags/v3.11.4:d2340ef, Jun  7 2023, 05:45:37) [MSC v.1934 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license()" for more information.
+
+>>> L = [3, 'xyz', [10, 20]]
+>>> len(L)
+3
+>>> L[1], L[1][0], L[2], L[2][1]
+('xyz', 'x', [10, 20], 20)
+>>> M = L
+>>> L[1] = 5
+>>> L
+[3, 5, [10, 20]]
+>>> M
+[3, 5, [10, 20]]
+>>> id(L) == id(M)
+True
+
+>>> # indeksowanie
+>>> L[0], L[-1], L[-1][-1], L[1] # pierwszy, ostatni, ostatni, drugi
+(3, [10, 20], 20, 5)
+>>> # wycinki
+>>> l1 = [1, 2, 40, 5, -1, [7, 6, 0], 2, 33]
+>>> l1[2:8:2] # od 2 do 7 włącznie co drugi element
+[40, -1, 2]
+>>> l2 = l1[3:7]
+>>> l2
+[5, -1, [7, 6, 0], 2]
+>>> l1[0:3] = [] # usuwanie
+l1
+[5, -1, [7, 6, 0], 2, 33]
+>>> l1[0] = [] # tak nie robić
+>>> l1
+[[], -1, [7, 6, 0], 2, 33]
+>>> del l1[0]
+>>> l1
+[-1, [7, 6, 0], 2, 33]
+
+>>> # konkatenacja i powtórzenie
+>>> l1 = [1, 2, 3]
+>>> l2 = [7, 8, 9, 10]
+>>> l1 + l2 # połączenie dwóch list w jedną
+[1, 2, 3, 7, 8, 9, 10]
+>>> l3 = ['koty']
+>>> l3 * 20
+['koty', 'koty', 'koty', 'koty', 'koty', 'koty', 'koty', 'koty', 'koty', 'koty', 'koty', 'koty', 'koty', 'koty', 'koty', 'koty', 'koty', 'koty', 'koty', 'koty']
+
+>>> # podstawienie pod element lub wycinek
+>>> l1[1] = l2
+>>> l1
+[1, [7, 8, 9, 10], 3]
+>>> l1[1][1] = [222, 222, 222]
+>>> l1
+[1, [7, [222, 222, 222], 9, 10], 3]
+>>> l1[1:1] = [2, 3, 4, 5, 6] # podstawiam przed 1 element
+>>> l1
+[1, 2, 3, 4, 5, 6, [7, [222, 222, 222], 9, 10], 3]
+
+>>> # generowanie list funkcją range()
+>>> l4 = list(range(5, 50, 5))
+>>> l4
+[5, 10, 15, 20, 25, 30, 35, 40, 45]
+
+>>> # kopiowanie list
+>>> l1 = [1, 2, 3, [5, 6, 8], 9, 4]
+>>> import copy
+>>> # deepcopy
+>>> l2 = copy.deepcopy(l1)
+>>> id(l1), id(l2)
+(1362486345792, 1362486130496)
+>>> l2[0] = 111
+>>> l2[3][1] = 666
+>>> l1
+[1, 2, 3, [5, 6, 8], 9, 4]
+>>> l2
+[111, 2, 3, [5, 666, 8], 9, 4]
+>>> # oryginalna nie została zmieniona
+>>> # copy
+>>> l3 = copy.copy(l1)
+>>> l1
+[1, 2, 3, [5, 6, 8], 9, 4]
+>>> l3
+[1, 2, 3, [5, 6, 8], 9, 4]
+>>> id(l1), id(l3)
+(1362486345792, 1362486351232)
+>>> l3[1] = 22222
+>>> l3[3][2] = -80
+>>> l1
+[1, 2, 3, [5, 6, -80], 9, 4]
+>>> l3
+[1, 22222, 3, [5, 6, -80], 9, 4]
+>>> # zmiana w liście zagnieżdżonej
+>>> l1[3][2] = 8
+>>> # [:]
+>>> l4 = l1[:]
+>>> l1
+[1, 2, 3, [5, 6, 8], 9, 4]
+>>> l4
+>>> [1, 2, 3, [5, 6, 8], 9, 4]
+>>> id(l1), id(l4)
+(1362486345792, 1362486131200)
+>>> l4[5] = 'ola'
+>>> l4[3][0] = 'ewa'
+>>> l1
+[1, 2, 3, ['ewa', 6, 8], 9, 4]
+>>> l4
+[1, 2, 3, ['ewa', 6, 8], 9, 'ola']
+>>> # jak w przypadku copy
+>>> l1[3][0] = 5
+>>> # = kopiowanie referencji
+>>> l5 = l1
+>>> id(l1), id(l5)
+(1362486345792, 1362486345792)
+>>> id(l1) == id(l5)
+True
+>>> l1[0] = 'a'
+>>> l5[1] = 'b'
+>>> l5[3][0] = 'c'
+>>> l1[3][2] = 'd'
+>>> l1
+['a', 'b', 3, ['c', 6, 'd'], 9, 4]
+>>> l5
+['a', 'b', 3, ['c', 6, 'd'], 9, 4]
+>>> # ta sama lista
+
+>>> # sortowanie list
+>>> l1 = [1, 2, 8, -1, 0, 3, 9]
+>>> l1.sort()
+>>> l1
+[-1, 0, 1, 2, 3, 8, 9]
+>>> l1.sort(reverse=True)
+>>> l1
+[9, 8, 3, 2, 1, 0, -1]
+>>> l2 = ['ola', 'Ewa', 'aleksandra', 'Kasia', 'Basia', 'stasia']
+>>> l2.sort()
+>>> l2
+['Basia', 'Ewa', 'Kasia', 'aleksandra', 'ola', 'stasia']
+>>> l2.sort(key=str.lower)
+>>> l2
+['aleksandra', 'Basia', 'Ewa', 'Kasia', 'ola', 'stasia']
+>>> l2.sort(key=len)
+>>> l2
+['Ewa', 'ola', 'Basia', 'Kasia', 'stasia', 'aleksandra']
+>>> sorted([2, 5, 1, 0, -4, 2])
+[-4, 0, 1, 2, 2, 5]
+>>> newl = sorted([2, -1, 5, 4, 7, -2], reverse=True)
+>>> newl
+[7, 5, 4, 2, -1, -2]
+
+>>> # listy składane
+>>> [i ** 2 for i in range(10)]
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+>>> [[x, x * x] for x in range(5)]
+[[0, 0], [1, 1], [2, 4], [3, 9], [4, 16]]
+>>> [(x, y) for x in ['ola', 'ala', 'ula'] for y in ['kot', 'pies', 'wąż']]
+[('ola', 'kot'), ('ola', 'pies'), ('ola', 'wąż'), ('ala', 'kot'), ('ala', 'pies'), ('ala', 'wąż'), ('ula', 'kot'), ('ula', 'pies'), ('ula', 'wąż')]
+>>> [chr(x) for x in range(90, 100)]
+['Z', '[', '\\', ']', '^', '_', '`', 'a', 'b', 'c']
+>>> sum([x ** 3 for x in range(4)])
+36
+
+>>> # element poza końcem listy
+>>> L = ['a', 'b', 'c']
+>>> L[3]
+Traceback (most recent call last):
+  File "<pyshell#106>", line 1, in <module>
+    L[3]
+IndexError: list index out of range
+>>> L[5] = 222
+Traceback (most recent call last):
+  File "<pyshell#107>", line 1, in <module>
+    L[5] = 222
+IndexError: list assignment index out of range
+
+>>> # podstawianie a kopiowanie
+>>> l1 = [1, 2, 5, [7, 3, 4], 9]
+>>> l2 = list(l1) # kopiowanie
+>>> l2[1] = 222
+>>> l2[3][1] = 333
+>>> l1[0] = -1
+>>> l1
+[-1, 2, 5, [7, 333, 4], 9]
+>>> l2
+[1, 222, 5, [7, 333, 4], 9]
+>>> id(l1), id(l2)
+(1362486462208, 1362485961024)
+>>> # jak płytka kopia
+>>> # podstawianie
+>>> l3 = l1
+>>> l1
+[-1, 2, 5, [7, 333, 4], 9]
+>>> l3
+[-1, 2, 5, [7, 333, 4], 9]
+>>> id(l1) == id(l3)
+True
+>>> # zmiana w jednej liście dowolnego elementu powoduje zmianę w drugiej liście
+
+>>> # lista metod dla list
+>>> dir(list)
+['__add__', '__class__', '__class_getitem__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getstate__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'clear', 'copy', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
