@@ -1,0 +1,82 @@
+Python 3.11.4 (tags/v3.11.4:d2340ef, Jun  7 2023, 05:45:37) [MSC v.1934 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license()" for more information.
+
+>>> # metody krotek
+>>> dir(tuple)
+['__add__', '__class__', '__class_getitem__', '__contains__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'count', 'index']
+>>> t4 = (1, 2, 3, 4)
+>>> t5 = 1, 2, 3, 4, 5
+>>> t4
+(1, 2, 3, 4)
+>>> t5
+(1, 2, 3, 4, 5)
+>>> type(t4)
+<class 'tuple'>
+>>> type(t5)
+<class 'tuple'>
+>>> len(t5)
+5
+>>> t4 + t5
+(1, 2, 3, 4, 1, 2, 3, 4, 5)
+>>> t4[0]
+1
+>>> t5[2:4]
+(3, 4)
+>>> 9 in t4
+False
+>>> 1 in t5
+True
+>>> t4 * 10
+(1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4)
+>>> t4 * t5
+Traceback (most recent call last):
+  File "<pyshell#39>", line 1, in <module>
+    t4 * t5
+TypeError: can't multiply sequence by non-int of type 'tuple'
+>>> t4 == t5
+False
+
+# krotki i listy
+>>> L = ['a']
+>>> T = tuple(L)
+>>> L = [1, 2, 3, 4]
+>>> T = tuple(L)
+>>> T = (0,) + T[::-1]
+>>> T
+(0, 4, 3, 2, 1)
+
+>>> # podstawienia
+>>> (x, y, z) = (11, 92, -7)
+>>> x
+11
+>>> z
+-7
+>>> data = (9, 3)
+>>> (x1, x2) = data
+>>> x2
+3
+>>> (pon, wt, śr, czw, pt, sb, nd) = range(1, 7+1)
+>>> pon
+1
+
+>>> # inne metody krotek
+>>> T
+(0, 4, 3, 2, 1)
+>>> T.index(1)
+4
+>>> T.count(3)
+1
+>>> repr(T)
+'(0, 4, 3, 2, 1)'
+
+>>> # niezmienność krotek
+>>> T[0] = 10
+Traceback (most recent call last):
+  File "<pyshell#36>", line 1, in <module>
+    T[0] = 10
+TypeError: 'tuple' object does not support item assignment
+>>> T.append(12)
+Traceback (most recent call last):
+  File "<pyshell#37>", line 1, in <module>
+    T.append(12)
+AttributeError: 'tuple' object has no attribute 'append'
