@@ -1,28 +1,19 @@
 seq1 = 'toronto123'
 seq2 = 'tokio345'
+seq3 = 'wowondo012'
 
-# sposób 1, niezbyt wydajny
+# sposób 1
 a = []
 b = []
 
 for i in seq1:
-    if i not in a:
-        a.append(i)
+    for j in seq2:
+        if i == j:
+            if i not in a:
+                a.append(i)
+for i in seq1+seq2:
     if i not in b:
-        b.append(i)        
-
-n = len(a)
-i = 0
-while i < n:
-    if a[i] not in seq2:
-        del a[i]
-        n -= 1
-        i -= 1
-    i += 1
-
-for j in seq2:
-    if j not in b:
-        b.append(j)
+        b.append(i)
 
 print(a)
 print(b)
@@ -36,18 +27,18 @@ print(set1 | set2)
 print()
 
 # sposób 3
-def fa(*args):
+def fa(seq1, seq2):
     a = []
-    smin = min(args, key=len)
-    smax = max(args, key=len)
+    smin = min([seq1, seq2], key=lambda s:(len(s), s))
+    smax = max([seq1, seq2], key=lambda s:(len(s), s))
     for s in smin:
         if s in smax and s not in a:
             a.append(s)
     return a
         
-def fb(*args):
+def fb(seq1, seq2):
     b = []
-    for seq in args:
+    for seq in [seq1, seq2]:
         for s in seq:
             if not s in b:
                 b.append(s)
@@ -55,11 +46,13 @@ def fb(*args):
 
 print(fa(seq1, seq2))
 print(fb(seq1, seq2))
+print(fa(seq1, seq3))
+print(fb(seq1, seq3))
 print()
 
 # sposób 4
-a = set([s for s in min([seq1, seq2], key=len) if s in max([seq1, seq2],
-                                                           key=len)])
-b = set([s for s in seq1+seq2])
+a = set([s for s in min([seq1, seq3], key=lambda s:(len(s), s))
+         if s in max([seq1, seq3], key=lambda s:(len(s), s))])
+b = set([s for s in seq1+seq3])
 print(a)
 print(b)
