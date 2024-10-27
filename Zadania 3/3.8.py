@@ -29,25 +29,33 @@ print()
 # sposób 3
 def fa(seq1, seq2):
     a = []
-    smin = min([seq1, seq2], key=lambda s:(len(s), s))
-    smax = max([seq1, seq2], key=lambda s:(len(s), s))
-    for s in smin:
-        if s in smax and s not in a:
-            a.append(s)
+    if seq1 == seq2:
+        a = [s for s in seq1]
+    else:
+        smin = min([seq1, seq2], key=lambda s:(len(s), s))
+        smax = max([seq1, seq2], key=lambda s:(len(s), s))
+        for s in smin:
+            if s in smax and s not in a:
+                a.append(s)
     return a
         
 def fb(seq1, seq2):
     b = []
-    for seq in [seq1, seq2]:
-        for s in seq:
-            if not s in b:
-                b.append(s)
+    if seq1 == seq2:
+        b = [s for s in seq1]
+    else:
+        for seq in [seq1, seq2]:
+            for s in seq:
+                if not s in b:
+                    b.append(s)
     return b
 
 print(fa(seq1, seq2))
 print(fb(seq1, seq2))
 print(fa(seq1, seq3))
 print(fb(seq1, seq3))
+print(fa(seq1, seq1))
+print(fb(seq1, seq1))
 print()
 
 # sposób 4
