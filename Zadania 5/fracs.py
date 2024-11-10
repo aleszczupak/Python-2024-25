@@ -8,8 +8,8 @@ def add_frac(frac1, frac2):
         fracsum[0] = frac1[0] * frac2[1] + frac1[1] * frac2[0]
         fracsum[1] = frac1[1] * frac2[1]
         gcd =  math.gcd(fracsum[0], fracsum[1])
-        fracsum[0] /= gcd
-        fracsum[1] /= gcd
+        fracsum[0] //= gcd
+        fracsum[1] //= gcd
         return minus(fracsum)      
 
 def sub_frac(frac1, frac2):
@@ -20,8 +20,8 @@ def sub_frac(frac1, frac2):
         fracsub[0] = frac1[0] * frac2[1] - frac1[1] * frac2[0]
         fracsub[1] = frac1[1] * frac2[1]
         gcd =  math.gcd(fracsub[0], fracsub[1])
-        fracsub[0] /= gcd
-        fracsub[1] /= gcd
+        fracsub[0] //= gcd
+        fracsub[1] //= gcd
         return minus(fracsub)    
 
 def mul_frac(frac1, frac2):
@@ -31,7 +31,7 @@ def mul_frac(frac1, frac2):
         fracmul = [0, 0]
         fracmul[0] = frac1[0] * frac2[0]
         fracmul[1] = frac1[1] * frac2[1]
-        fracmul = [fracit / math.gcd(fracmul[0], fracmul[1]) for fracit
+        fracmul = [fracit // math.gcd(fracmul[0], fracmul[1]) for fracit
                     in fracmul]
         return minus(fracmul)
 
@@ -42,7 +42,7 @@ def div_frac(frac1, frac2):
         fracdiv = [0, 0]
         fracdiv[0] = frac1[0] * frac2[1]
         fracdiv[1] = frac1[1] * frac2[0]
-        fracdiv = [fracit / math.gcd(fracdiv[0], fracdiv[1]) for fracit
+        fracdiv = [fracit // math.gcd(fracdiv[0], fracdiv[1]) for fracit
                     in fracdiv]
         return minus(fracdiv)
 
@@ -71,7 +71,7 @@ def frac2float(frac):
     if frac[1] == 0:
         raise ZeroDivisionError
     else:
-        return float(frac[0] / frac[1])
+        return frac[0] / frac[1]
 
 def minus(frac):
     '''Funkcja zapewniająca poprawny zapis znaku ułamka, tj. znak minus stojący
