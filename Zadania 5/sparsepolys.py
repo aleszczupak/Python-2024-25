@@ -5,8 +5,6 @@ def add_sparse_poly(poly1, poly2):
     >>> add_sparse_poly({5: 0}, {0: 1, 2: -4})
     {0: 1, 2: -4}
     '''
-    poly1 = new_poly(poly1)
-    poly2 = new_poly(poly2)
     poly3 = dict()
     for key in poly1:
         poly3[key] = poly3.get(key, 0) + poly1[key]
@@ -14,9 +12,7 @@ def add_sparse_poly(poly1, poly2):
         poly3[key] = poly3.get(key, 0) + poly2[key]
         if poly3[key] == 0:
             del poly3[key]
-    if not poly3:
-        poly3[0] = 0
-    return poly3
+    return new_poly(poly3)
 
 def sub_sparse_poly(poly1, poly2):
     '''
@@ -25,16 +21,12 @@ def sub_sparse_poly(poly1, poly2):
     >>> sub_sparse_poly({1: 2, 3: 5}, {1: 2, 3: 5})
     {0: 0}
     '''
-    poly1 = new_poly(poly1)
-    poly2 = new_poly(poly2)
     poly3 = dict(poly1)
     for key in poly2:
         poly3[key] = poly3.get(key, 0) - poly2[key]
         if poly3[key] == 0:
-            del poly3[key]
-    if not poly3:
-        poly3[0] = 0            
-    return poly3
+            del poly3[key]           
+    return new_poly(poly3)
 
 def mul_sparse_poly(poly1, poly2):
     '''
@@ -49,9 +41,7 @@ def mul_sparse_poly(poly1, poly2):
             if poly1[key1] * poly2[key2] != 0:
                 poly3[key1+key2] = poly3.get((key1+key2), 0) +\
                                    poly1[key1] * poly2[key2]
-    if not poly3:
-        poly3[0] = 0
-    return poly3       
+    return new_poly(poly3)       
 
 def is_sparse_zero(poly):
     '''
@@ -64,6 +54,7 @@ def is_sparse_zero(poly):
     >>> is_sparse_zero({5: 0})
     True
     '''
+    poly = new_poly(poly)
     if poly:
         for key, val in poly.items():
             return False if val != 0 else True
@@ -79,9 +70,7 @@ def eq_sparse_poly(poly1, poly2):
     >>> eq_sparse_poly({5: 0}, {4: 0})
     True
     '''
-    poly1 = new_poly(poly1)
-    poly2 = new_poly(poly2)
-    return True if poly1 == poly2 else False
+    return True if new_poly(poly1) == new_poly(poly2) else False
 
 def eval_sparse_poly(poly, x):
     '''
@@ -89,8 +78,8 @@ def eval_sparse_poly(poly, x):
     -239
     >>> eval_sparse_poly({0: 3, 1: 7, 5: -8}, 0)
     3
-    >>> eval_sparse_poly({5: 0}, 7)
-    0
+    >>> eval_sparse_poly({5: 0, 7: 1}, 2)
+    128
     '''
     result = 0
     for key, val in poly.items():
@@ -107,6 +96,8 @@ def pow_sparse_poly(poly, n):
     {0: 27}
     >>> pow_sparse_poly({5: 0}, 2)
     {0: 0}
+    >>> pow_sparse_poly({1: 5, 2: 3, 5: 0}, 3)
+    {3: 125, 4: 225, 5: 135, 6: 27}
     '''
     polypow = poly
     if n == 0:
@@ -126,14 +117,14 @@ def diff_sparse_poly(poly):
     {0: 0}
     >>> diff_sparse_poly({5: 0})
     {0: 0}
+    >>> diff_sparse_poly({7: 0, 5: 2})
+    {4: 10}
     '''
     polydiff = {}
     for key in poly:
         if key > 0 and key * poly[key] != 0:
             polydiff[key-1] = key * poly[key]
-    if not polydiff:
-        polydiff[0] = 0
-    return polydiff
+    return new_poly(polydiff)
 
 def combine_sparse_poly(poly1, poly2):
     '''
@@ -141,6 +132,8 @@ def combine_sparse_poly(poly1, poly2):
     {2: 98, 1: -7, 0: -1}
     >>> combine_sparse_poly({0: 2, 2: -3}, {1: 3, 2: 2})
     {0: 2, 2: -27, 3: -36, 4: -12}
+    >>> combine_sparse_poly({7: 0, 2: 3}, {1: 3, 2: 2})
+    {2: 27, 3: 36, 4: 12}
     '''
     polycomb = {}
     for key, val in poly1.items():
@@ -153,8 +146,12 @@ def new_poly(poly):
     '''Funkcja usuwająca niepotrzebne pary tj. z wartościami równymi zero.
     >>> new_poly({5: 0, 3: 1})
     {3: 1}
+    >>> new_poly({4: 0})
+    {0: 0}
     '''
     newpoly = {x: a for x, a in poly.items() if a != 0}
+    if not newpoly:
+        newpoly[0] = 0
     return newpoly
 
 if __name__ == '__main__':
