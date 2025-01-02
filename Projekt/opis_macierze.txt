@@ -1,0 +1,37 @@
+Aleksandra Szczupak
+
+Projekt zaliczeniowy kursu Język Python 2024/25
+
+*** MACIERZE ***
+
+Klasa reprezentujące macierze gęste na bazie list Pythona. Elementy macierzy są zapisywane wierszami na liście.
+
+
+W klasie Matrix zaimplementowano następujące działania na macierzach:
+* porównywanie dwóch macierzy - dwie macierze są takie same, jeśli mają te same wymiary i wszystkie ich elementy macierzowe na poszczególnych pozycjach mają identyczne wartości (z pełną dokładnością),
+* porównywanie dwóch macierzy z dokładnością domyślnie do 3 miejsc po przecinku - dwie macierz są sobie w przybliżeniu równe, jeśli mają takie same wymiary i wszystkie ich elementy macierzowe na poszczególnych pozycjach mają takie same wartości do 3 miejsc po przecinku,
+* dodawanie dwóch macierzy - operacja ta jest możliwa, jeśli wymiary obydwu macierzy są jednakowe,
+* odejmowanie dwóch macierzy - operacja jest możliwa, jeśli wymiary obydwu macierzy są jednakowe,
+* mnożenie dwóch macierzy - operacja jest możliwa, jeśli pierwsza macierz A ma tyle samo kolumn - wymiar n x m, co druga macierz B wierszy - wymiar m x p, zaś wynikowa macierz C jest wymiaru n x p: c_ij = a_i1 * b_1j + a_i2 * b_2j + ... + a_in * b_nj = sum_{k=1}^n a_ik * b_kj,
+* mnożenie wszystkich elementów macierzy przez daną liczbę,
+* potęgowanie macierzy kwadratowej - mnożenie macierzy z samą sobą power-1 razy,
+* dzielenie wszystkich elementów macierzy przez daną liczbę,
+* transpozycja macierzy (jako atrybut wirtualny @property) - zamiana wierszy z kolumnami,
+* zmiana wymiaru macierzy - operacja możliwa, jeśli iloczyn nowych wymiarów macierzy równy jest ilocznynowi wymiarów macierzy pierwotnej (obydwie macierze muszą mieć jednakową ilość elementów),
+* ślad macierzy kwadratowej (jako atrybut wirtualny @property) - suma elementów na głównej przekątnej,
+* wyznacznik macierzy kwadratowej (jako atrybut wirtualny @property) - rekurencyjna metoda wykorzystująca rozwinięcie Laplace'a względem pierwszego (i=1) wiersza: det(A) = \sum_{k=1}^n a_ik * D_ik, gdzie: n to wymiar macierzy, wiersze spełniają 1 <= i <=n, D_ij = (-1)^(i+j) det(A_ij) to dopełnienie algebraiczne elementu a_ij macierzy A,
+* podmacierz macierzy o wymiarach n x m powstała po skreśleniu i-tego wiersza oraz j-tej kolumny - wynikowa macierz ma wymiar n-1 x m-1; numeracja kolumn oraz wierszy od 0 do odpowiednio n-1 oraz m-1,
+* macierz odwrotna macierzy kwadratowej (jako atrybut wirtualny @property) - A^(-1) istnieje jeśli macierz A jest nieosobliwa, ma wyznacznik różny od zera; metoda wykorzystująca macierz dopełnień algebraicznych D: A^(-1) = (D)^T / det(A),
+* macierz jednostkowa (kwadratowa) o wymiarze dim x dim (jako metoda klasy @classmethod),
+* tworzenie macierzy bezpośrednio poprzez podanie zagnieżdżonej listy - lista z listami reprezentującymi wiersze macierzy (jako metoda klasy @classmethod).
+
+Ponadto, możliwe jest także:
+* odczytywanie elementu macierzowego m[i, j],
+* przypisywanie wartości danemu elementowi macierzowemu,
+* wykonywanie płytkiej i głębokiej kopii macierzy.
+
+W pliku 'main_macierze.py' zaprezentowano przykładowe zastosowania klasy Matrix. Plik 'test_macierze.py' zawiera test modułu 'macierze.py' z klasą Matrix w formie UnitTestu.
+* przypisywanie wartości danemu elementowi macierzowemu,
+* wykonywanie płytkiej i głębokiej kopii macierzy.
+
+W pliku 'main_macierze.py' zaprezentowano przykładowe zastosowania klasy Matrix. Plik 'test_macierze.py' zawiera test modułu 'macierze.py' z klasą Matrix w formie UnitTestu.
